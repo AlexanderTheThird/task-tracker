@@ -1,32 +1,4 @@
-/ <%= form_with(model: project) do |form| %>
-/   <% if project.errors.any? %>
-/     <div id="error_explanation">
-/       <h2><%= pluralize(project.errors.count, "error") %> prohibited this project from being saved:</h2>
-/
-/       <ul>
-/         <% project.errors.each do |error| %>
-/           <li><%= error.full_message %></li>
-/         <% end %>
-/       </ul>
-/     </div>
-/   <% end %>
-/
-/   <div class="field">
-/     <%= form.label :name %>
-/     <%= form.text_field :name %>
-/   </div>
-/
-/   <div class="field">
-/     <%= form.label :description %>
-/     <%= form.text_area :description %>
-/   </div>
-/
-/   <div class="actions">
-/     <%= form.submit %>
-/   </div>
-/ <% end %>
-
-= simple_form_for project  do |form|
+= simple_form_for project do |form|
   .field
     = form.input :name
 
@@ -34,9 +6,7 @@
     = form.input :description
   
   .field
-    = form.select(:user_ids, User.all.collect {|user| [ user.email, user.id ]},
-            { :prompt => "Please select" },
-            { :multiple => true, :size => 5 })
+    = form.input :user_ids, collection: User.all, input_html: { multiple: true }
 
-  .actions.btn-primary
-    = form.button :submit
+  .actions
+    = form.button :submit, class: "btn btn-primary"
