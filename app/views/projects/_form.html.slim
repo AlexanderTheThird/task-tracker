@@ -32,6 +32,11 @@
 
   .field
     = form.input :description
+  
+  .field
+    = form.select(:user_ids, User.all.collect {|user| [ user.email, user.id ]},
+            { :prompt => "Please select" },
+            { :multiple => true, :size => 5 })
 
   .actions.btn-primary
     = form.button :submit
